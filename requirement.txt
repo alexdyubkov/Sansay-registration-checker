@@ -1,0 +1,33 @@
+1)How to run the script:
+/bin/python3 sansay_reg_checker.py//run the script
+
+2)requirements:
+--From the Sansay:
+a)Please create the same users on sansays with login/pass before running the script.
+b)sansay hosts are pingable from this host where we are running this script, or it'll show that the host is down.
+
+--From the host:
+a)yum install python 3.8.11. 
+b)pip3 install loguru==0.6.0
+c)pip3 install requests==2.26.0
+d)pip3 install selenium==3.141.0
+e)//Please try to find chrome  version 105, because selenium web drive in this example is for 105 version. Other versions may not work. But if you can't find v105 you can try to install the latest one:
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm //install latest chrome
+yum install ./google-chrome-stable_current_*.rpm //install google chrome
+
+google-chrome --version //will show chrome version. 
+
+
+f)mkdir /usr/bin/sansay_reg_checker//create folder "sansay_reg_checker" in usr/bin
+cd /usr/bin/sansay_reg_checker // copy sansay-registration-checker here
+
+
+g)cd /usr/bin/sansay_reg_checker 
+wget https://chromedriver.storage.googleapis.com/105.0.5195.52/chromedriver_linux64.zip //download chromedriver for your Chrome version. This will download driver for Chrome v105.
+unzip ./chromedriver_linux64.zip
+
+
+
+
+
+
