@@ -1,31 +1,6 @@
 '''
-1)Purpose of the script:
+Purpose of the script:
 This script checks the number of registration on Sansays(voip SanSBC devices) hosts based on Selenium module(same way usual users do it with a browser). 
-
-2)Packet requirements:
-# yum install python3
-# pip3 install selenium
-# wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-# yum install ./google-chrome-stable_current_*.rpm
-# wget https://chromedriver.storage.googleapis.com/102.0.5005.61/chromedriver_linux64.zip
-# unzip ./chromedriver_linux64.zip
-# mv chromedriver /usr/bin
-
-3)How to run the script:
-/bin/python3 your script
-
-4)Other requirements
-a)Please create users on sansays with login/pass before running the script. In this script, all users have same login/password.
-b)sansay hosts are pingable from this host
-
-
-
-
-5)Script logic
-    #1)Are we in chosen time range? -> yes -> 2)post to slack the results
-    #                               -> no  -> 2)connection to all hosts is good? -> no -> 3)post to slack the results you got
-    #                                                                            ->yes -> 3)did we hit the registration trigger? -> no -> 4)end
-    #                                                                                                                            -> yes ->4)post to slack the results you got
 '''
 
 
@@ -67,9 +42,11 @@ triggers = { # triggers for sansays registration numbers
     'xxx3': 666}  
 
 #chosen time range
-# if we are inside this time range the script will send results to slack no matter if they are successful or not
-start = '07:59' 
-end = '17:01'
+start = '07:59'  # if we are inside this time range the script will be triggered -> it'll send to slack no matter what results
+# are.
+# If we are out of the range -> it will trigger only if it's trigger
+# limits for sansay registration numbers
+end = '15:01'
 ############################################################################
 
 
@@ -92,15 +69,16 @@ def main():
 
     input_checker()
 
-
-
     def check_connection_to_hosts(hosts: list, port: int) -> list:
         result_of_function = []
+        logger.info(f"checking_connection_to_hosts by ip and port...: ")
+
 
         for i in hosts:
             a_socket = socket.socket(
                 socket.AF_INET,
                 socket.SOCK_STREAM)  # tcp ipv4 socket
+            a_socket.settimeout(10)    
             a_socket_with_ip_port = a_socket.connect_ex((i, port))
 
             if a_socket_with_ip_port == 0:
@@ -111,11 +89,10 @@ def main():
                 #print(f'{i}:{port} is closed')
                 result_of_function.append(f'{i}:{port} is closed')
                 a_socket.close()
-        # returns like ['xxx.xxx.xxx.xxx:port is open', 'xxx.xxx.xxx.xxx:xxx is
+        # returns like ['xxx.xxx.xxx.xxx:8888 is open', 'xxx.xxx.xxx.xxx:8888 is
         # open', 'xxx.xxx.xxx.xxx:8888 is closed']
-        logger.info(f"check_connection_to_hosts: "+ str(result_of_function))
+        logger.info(f"connection to hosts by ip and port result: "+ str(result_of_function))
         return(result_of_function)
-
 
     check_connection_to_hosts_result = check_connection_to_hosts(hosts, port)
 
