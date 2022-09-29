@@ -14,9 +14,9 @@ Script creates logs in the folder of the script.
 
 
 2)#####################Script logic:#########################
-    #1)Are we in chosen time range? -> yes -> 2)post to slack the results
+    "#1)Are we in chosen time range? -> yes -> 2)post to slack the results
     #                               -> no  -> 2)connection to all hosts is good? -> no -> 3)post to slack the results you got
     #                                                                            ->yes -> 3)did we hit the registration trigger? -> no -> 4)end
-    #
+    #"
 ##########################################################   
     
