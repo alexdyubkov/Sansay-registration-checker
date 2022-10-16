@@ -35,7 +35,7 @@ names = {  # names for sansays, if you want to add more hosts, please follow the
     'xxx3': 'https://ip:port/SSConfig/User/control'
 }
 
-triggers = { # minimal registration level when it should trigger  
+triggers = { # if our real reg number < trigger level => it'll alert
     #'sansay name':trigger_number
     'xxx1': 666,
     'xxx2': 666,
