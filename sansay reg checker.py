@@ -35,7 +35,7 @@ names = {  # names for sansays, if you want to add more hosts, please follow the
     'xxx3': 'https://ip:port/SSConfig/User/control'
 }
 
-triggers = { # triggers for sansays registration numbers
+triggers = { # minimal registration level when it should trigger  
     #'sansay name':trigger_number
     'xxx1': 666,
     'xxx2': 666,
@@ -204,7 +204,7 @@ def main():
 
             triggers_value = (triggers[link_to_name_converter_key])
 
-            if int(triggers_value) <= int(link_to_name_converter_value):
+            if int(triggers_value) >= int(link_to_name_converter_value):
                 result += '  '
                 result += i
         
