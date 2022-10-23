@@ -259,17 +259,39 @@ def main():
                     title = (f"Unite Sansay registration :scream_cat:")
                     color = "#ee3333"
                 else:
-                    message = ('Connection status to Unite Sansays: ' +
-                            '\n' +
-                            str(check_connection_to_hosts_result) +
-                            '\n\n' +
-                            'Registration count is:  ' +
-                            '\n' +
-                            str(result_of_link_to_name_converter))
-                    title = (f"Unite Sansay registration :pika:")
-                    color = "#9733EE"
-            sender(color, title, message)
+                    if result_registration_trigger_issue != '':  # hit at least 1 trigger
+                        message = ('One of sansays hit the registration trigger!: ' +
+                                '\n' +
+                                result_registration_trigger_issue +
+                                '\n\n' +
+                                'Connection status to Unite Sansays: ' +
+                                '\n' +
+                                str(check_connection_to_hosts_result) +
+                                '\n\n' +
+                                'Registration count is:  ' +
+                                '\n' +
+                                str(result_of_link_to_name_converter) +
+                                '\n')     
+                        title = (f"Unite Sansay registration :scream_cat:")
+                        color = "#ee3333"
+                        sender(color, title, message)
+                        exit()
 
+
+
+                    else:
+                        message = ('Connection status to Unite Sansays: ' +
+                                '\n' +
+                                str(check_connection_to_hosts_result) +
+                                '\n\n' +
+                                'Registration count is:  ' +
+                                '\n' +
+                                str(result_of_link_to_name_converter))
+                        title = (f"Unite Sansay registration :pika:")
+                        color = "#9733EE"
+                sender(color, title, message)
+                exit()
+                    
         else:  # we are not in chosen hours
             if connection_issus_to_at_least_one_host():  # can't connectn to at least 1host
                 message = ('Connection status to Unite Sansays: ' +
